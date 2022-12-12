@@ -12,7 +12,7 @@ fun main() {
         var inspected : BigInteger = BigInteger.ZERO
     ){
         override fun toString(): String {
-            return "Monkey(name=$name, items=$items)"
+            return "Monkey(name=$name, inspected=${inspected}, items=$items)"
         }
     }
     val testMonkeys1 = arrayOf<Monkey> (
@@ -84,6 +84,73 @@ fun main() {
         )
 
     )
+
+    val realMonkeys2 = arrayOf<Monkey> (
+        Monkey(0,
+            mutableListOf(BigInteger.valueOf(56), BigInteger.valueOf(52), BigInteger.valueOf(58), BigInteger.valueOf(96), BigInteger.valueOf(70), BigInteger.valueOf(75), BigInteger.valueOf(72)),
+            {old -> old * BigInteger.valueOf(17)},
+            BigInteger.valueOf(11),
+            2,
+            3
+        ),
+
+        Monkey(1,
+            mutableListOf(BigInteger.valueOf(75), BigInteger.valueOf(58), BigInteger.valueOf(86), BigInteger.valueOf(80), BigInteger.valueOf(55), BigInteger.valueOf(81)),
+            {old -> old + BigInteger.valueOf(7)},
+            BigInteger.valueOf(3),
+            6,
+            5
+        ),
+
+        Monkey(2,
+            mutableListOf(BigInteger.valueOf(73), BigInteger.valueOf(68), BigInteger.valueOf(73), BigInteger.valueOf(90)),
+            {old -> old* old},
+            BigInteger.valueOf(5),
+            1,
+            7
+        ),
+
+        Monkey(3,
+            mutableListOf(BigInteger.valueOf(72), BigInteger.valueOf(89),BigInteger.valueOf( 55),BigInteger.valueOf( 51), BigInteger.valueOf(59)),
+            {old -> old + BigInteger.valueOf(1)},
+            BigInteger.valueOf(7),
+            2,
+            7
+        ),
+
+        Monkey(4,
+            mutableListOf(BigInteger.valueOf(76), BigInteger.valueOf(76), BigInteger.valueOf(91)),
+            {old -> old * BigInteger.valueOf(3)},
+            BigInteger.valueOf(19),
+            0,
+            3
+        ),
+
+        Monkey(5,
+            mutableListOf(BigInteger.valueOf(88)),
+            {old -> old + BigInteger.valueOf(4)},
+            BigInteger.valueOf(2),
+            6,
+            4
+        ),
+
+        Monkey(6,
+            mutableListOf(BigInteger.valueOf(64), BigInteger.valueOf(63), BigInteger.valueOf(56), BigInteger.valueOf(50), BigInteger.valueOf(77), BigInteger.valueOf(55), BigInteger.valueOf(55), BigInteger.valueOf(86)),
+            {old -> old + BigInteger.valueOf(8)},
+            BigInteger.valueOf(13),
+            4,
+            0
+        ),
+
+        Monkey(7,
+            mutableListOf(BigInteger.valueOf(79), BigInteger.valueOf(58)),
+            {old -> old + BigInteger.valueOf(6)},
+            BigInteger.valueOf(17),
+            1,
+            5
+        ),
+
+        )
 
     val realMonkeys = arrayOf<Monkey> (
         Monkey(0,
@@ -189,6 +256,7 @@ fun main() {
                     monkey.inspected += BigInteger.ONE
 
                     var newVal = monkey.operation(item)
+                    newVal %= BigInteger.valueOf(9699690)
 
                     if(newVal % monkey.dividible == BigInteger.ZERO){
                         monkeys[monkey.trueThrow].items.add(newVal)
@@ -212,5 +280,5 @@ fun main() {
 
     val input = readInput("Day11")
     println(part1(input, realMonkeys))
-//    println(part2(input))
+    println(part2(input, realMonkeys2))
 }
